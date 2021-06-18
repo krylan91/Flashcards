@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@500&display=swap');
+
+body {
+    background-image: url(resources/map.jpg);
+    background-size: cover;
+    overflow: auto;
+}
+
+h1 {
+    font-family: 'Baloo Tammudu 2', cursive;
+    color: orange;
+    font-size: 45px;
+    text-align: center;
+}
+
+div {
+    display: flex;
+}
+
+p {
+    text-align: center;
+    vertical-align: center;
+    font-family: 'Staatliches', cursive;
+    color: sienna;
+    font-size: 20px;
+}
+
+/* Общий контейнер для всех флекс-элементов */
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-evenly;
+    width: 75vh;
+    height: 75vh;
+    /* Так блок центрируется по горизонтали */
+    margin: auto;
+    position: relative;
+}
+
+/* Отдельная ячейка флекс-контейнера */
+.flex-item {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    justify-content: space-around;
+    align-items: center;
+    perspective: 1000px;
+}
+/* Элемент "карточка", на которую крепится лицевая и обратная сторона */
+.card {
+    /* Абсолютная позиция по отношению к родительскому элементу, то есть флекс-ячейке */
+    position: absolute;
+    /* Уменьшаем размер карточки относительно ячейки, чтобы не было наезжаний, и стилизуем её */
+    width: 85%;
+    height: 85%;
+    border: solid grey;
+    border-radius: 10px;
+    background: #ffd7b6;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    margin: 2%;
+    padding: 10px;
+    /* Это чтобы выровнять лицевую и обратную стороны */
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Увеличиваем карточку, когда на неё наводится мышка */
+.card:hover {
+    cursor: pointer;
+    background: #d19d73;
+    color: saddlebrown;
+    transform: scale(1.2);
+}
+
+/* Когда нажимаем на карточку, то переворачиваем её.
+   Таким образом переворачивается сама карточка и прикреплённые на неё слои: лицевой и обратный. */
+.card:active {
+    transform: rotateY(180deg);
+}
+
+/* Позиционируем абсолютно лицевую и обратную сторону, чтобы они чётко накладывались на элемент "карточка".
+   Также скрываем обратную сторону, чтобы при перевороте не было видно лицевой стороны.
+*/
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Переворачиваем обратную сторону. Таким образом, когда карточка не активна,
+   то мы видим лицевую сторону и перевёрнутую обратную сторону, поэтому не видно текста на обратной стороне. */
+.back {
+    transform: rotateY(180deg);
+}
